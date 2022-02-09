@@ -11,7 +11,7 @@ export default function LoginPage() {
     <Container>
       <Title>
         <img src={logo} />
-        MyWallet
+        <h1>SweetDreams</h1>
       </Title>
     </Container>
   );

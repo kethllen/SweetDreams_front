@@ -2,8 +2,7 @@ import React, { useContext, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { Container, StyledLink, Title, Input } from "./style";
-import TokenContext from "../../contexts/UserContext";
-import NameContext from "../../contexts/NameContext";
+import UserContext from "../../contexts/UserContext";
 
 export default function SingUpPage() {
   const [email, setEmail] = useState("");
@@ -17,14 +16,11 @@ export default function SingUpPage() {
       alert("As senhas não coincidem");
       return;
     } else {
-      const promise = axios.post(
-        "https://api-my--wallet.herokuapp.com/sign-up",
-        {
-          name,
-          email,
-          password,
-        }
-      );
+      const promise = axios.post(process.env.BACK_URL, {
+        name,
+        email,
+        password,
+      });
 
       promise.then((response) => {
         console.log("cadastrei");
@@ -77,8 +73,7 @@ export default function SingUpPage() {
   );
 }
 function LoginPage() {
-  const { setToken } = useContext(TokenContext);
-  const { setNameContext } = useContext(NameContext);
+  const { setToken, setName } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
@@ -91,7 +86,7 @@ function LoginPage() {
 
     promise.then((response) => {
       setToken(response.data.token);
-      setNameContext(response.data.name);
+      setName(response.data.name);
       navigate("/");
     });
     promise.catch((error) => {

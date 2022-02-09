@@ -13,19 +13,22 @@ const Container = styled.div`
 const Title = styled.div`
   display: flex;
   justify-content: center;
-  gap: 10px;
-  font-family: "Lobster", cursive;
-  font-size: 32px;
-  color: #ffffff;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 50px;
-  letter-spacing: 0em;
-  text-align: left;
-  margin-bottom: 24px;
+  h1 {
+    padding-top: 20px;
+    font-family: "Lobster", cursive;
+    font-size: 32px;
+    color: #ffffff;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 50px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-bottom: 24px;
+  }
+
   img {
-    width: 40px;
-    height: 40px;
+    width: 120px;
+    height: 120px;
   }
 `;
 const Input = styled.div`

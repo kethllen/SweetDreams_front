@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./components/LoginPage";
+import SingUpPage from "./components/SingUpPage";
 import UserContext from "./contexts/UserContext";
-import UrlContext from "./contexts/UrlContext";
 
 export default function App() {
   const [token, setToken] = useState("");
@@ -12,7 +12,6 @@ export default function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<LoginPage />} />
-          <Route path="/sing-up" element={<SingUpPage />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
