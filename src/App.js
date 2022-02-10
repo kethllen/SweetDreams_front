@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./components/LoginPage";
-import SingUpPage from "./components/SingUpPage";
 import UserContext from "./contexts/UserContext";
 
 export default function App() {
