@@ -1,28 +1,41 @@
-import { HeaderDiv, HeaderContainer, SearchDiv, SearchInput } from './style';
-import search from '../../assets/search.png';
-import cart from '../../assets/cart.png';
-import back from '../../assets/back.png';
-import { useNavigate } from 'react-router-dom';
+import {
+  HeaderDiv,
+  HeaderContainer,
+  SearchDiv,
+  SearchInput,
+  Logo,
+} from "./style";
+import search from "../../assets/search.png";
+import { IoHomeSharp } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
+import logo from "../../assets/logo.png";
+import { FaShoppingCart } from "react-icons/fa";
 
 export default function Header({ setInputValue, main }) {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
-
-    return (
-        <HeaderContainer>
-            <HeaderDiv>
-                {!main && <img className="back-button" onClick={() => navigate('/main')} src={back} alt="" />}
-                <h1>SweetDreams</h1>
-                {main && <SearchDiv>
-                    <SearchInput
-                        type="text"
-                        placeholder="O que está procurando?"
-                        onChange={e => setInputValue(e.target.value)}
-                    />
-                    <img src={search} alt="" />
-                </SearchDiv>}
-                <div className="cart"><img src={cart} alt="" /></div>
-            </HeaderDiv>
-        </HeaderContainer>
-    );
+  return (
+    <HeaderContainer>
+      <HeaderDiv>
+        {!main && <IoHomeSharp color="#ffffff" size={28} />}
+        <Logo>
+          <img src={logo} />
+          <h1>SweetDreams</h1>
+        </Logo>
+        {main && (
+          <SearchDiv>
+            <SearchInput
+              type="text"
+              placeholder="O que está procurando?"
+              onChange={(e) => setInputValue(e.target.value)}
+            />
+            <img src={search} alt="" />
+          </SearchDiv>
+        )}
+        <div className="cart">
+          <FaShoppingCart color="#ffffff" size={28} />
+        </div>
+      </HeaderDiv>
+    </HeaderContainer>
+  );
 }
