@@ -27,12 +27,11 @@ export default function MainPage() {
     }
 
     function handleSelection(product) {
-        // if (!token) {
-        //     // navigate("/");
-        // } else {
-        //     addToCart(product);
-        // }
-        addToCart(product);
+        if (!token) {
+            navigate("/cadastro");
+        } else {
+            addToCart(product);
+        }
     }
 
     async function addToCart(product) {
