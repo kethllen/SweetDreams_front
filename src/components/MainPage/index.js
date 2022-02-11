@@ -15,8 +15,7 @@ export default function MainPage() {
 
     useEffect(async () => {
         try {
-            // const promise = await axios.get(process.env.BACK_URL);
-            const promise = await axios.get('http://localhost:5000/products');
+            const promise = await axios.get(process.env.REACT_APP_BACK_URL + 'products');
             setProducts(promise.data);
         } catch (error) {
             console.log(error);
@@ -38,8 +37,7 @@ export default function MainPage() {
 
     async function addToCart(product) {
         try {
-            // await axios.post(process.env.BACK_URL);
-            const promise = await axios.post('http://localhost:5000/cart', { productId: product._id }, {
+            const promise = await axios.post(process.env.REACT_APP_BACK_URL + 'cart', { productId: product._id }, {
                 headers: {
                     'Authentication': `Bearer ${token}`
                 }
