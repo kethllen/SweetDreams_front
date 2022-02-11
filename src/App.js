@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./components/LoginPage";
-import SingUpPage from "./components/SingUpPage";
 import MainPage from "./components/MainPage";
 import UserContext from "./contexts/UserContext";
 
@@ -12,8 +11,8 @@ export default function App() {
     < UserContext.Provider value={{ token, setToken, name, setName }}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route path="/main" element={<MainPage />} />
+          <Route path="/" element={<MainPage />} />
+          <Route path="/cadastro" element={<LoginPage />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider >
