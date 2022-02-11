@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Cart from "./components/Cart";
 import LoginPage from "./components/LoginPage";
 import MainPage from "./components/MainPage";
 import UserContext from "./contexts/UserContext";
@@ -13,6 +14,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/cadastro" element={<LoginPage />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider >
