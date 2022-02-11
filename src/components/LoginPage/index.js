@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import { FaRegUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
 import { MdOutlineEmail } from "react-icons/md";
+import UserContext from "../../contexts/UserContext";
 import {
   Form,
   Container,
@@ -20,7 +21,55 @@ import {
 import logo from "../../assets/logo.png";
 
 export default function LoginPage() {
+  const { setToken, setName } = useContext(UserContext);
   const [login, setlogin] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [nameInput, setNameInput] = useState("");
+  const navigate = useNavigate();
+  console.log(process.env.REACT_APP_BACK_URL + "sign-in");
+  function handleLogin(e) {
+    e.preventDefault();
+    const promise = axios.post(process.env.REACT_APP_BACK_URL + "sign-in", {
+      email,
+      password,
+    });
+
+    promise.then((response) => {
+      setToken(response.data.token);
+      setName(response.data.name);
+      navigate("/");
+    });
+    promise.catch((error) => {
+      alert("Erro ao logar, tente novamente");
+      console.log(error.response);
+      setEmail("");
+      setPassword("");
+    });
+  }
+  function handleSingUp(e) {
+    e.preventDefault();
+    const promise = axios.post(process.env.REACT_APP_BACK_URL + "sign-up", {
+      name: nameInput,
+      email,
+      password,
+    });
+
+    promise.then((response) => {
+      setToken(response.data.token);
+      console.log(response.data.token);
+      setName(response.data.name);
+      console.log(response.data.name);
+      navigate("/");
+    });
+    promise.catch((error) => {
+      alert("Erro ao cadastrar tente novamente!");
+      console.log(error.response.data.message);
+      setNameInput("");
+      setEmail("");
+      setPassword("");
+    });
+  }
   return (
     <Container>
       <Logo>
@@ -44,21 +93,36 @@ export default function LoginPage() {
             <Description className="description-second">
               use seu email para se cadastrar
             </Description>
-            <Form>
+            <Form onSubmit={handleSingUp}>
               <label className="label-input">
                 <FaRegUser color="#7f8c8d" size={18} />
-                <input type="text" placeholder="Nome" />
+                <input
+                  type="text"
+                  value={nameInput}
+                  onChange={(e) => setNameInput(e.target.value)}
+                  placeholder="Nome"
+                />
               </label>
               <label className="label-input">
                 <MdOutlineEmail color="#7f8c8d" size={18} />
-                <input type="email" placeholder="Email" />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Email"
+                />
               </label>
 
               <label className="label-input">
                 <FaLock color="#7f8c8d" size={18} />
-                <input type="password" placeholder="Senha" />
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Senha"
+                />
               </label>
-              <BtnSec>Cadastrar</BtnSec>
+              <BtnSec type="submit">Cadastrar</BtnSec>
             </Form>
           </SecondColumn>
         </Content>
@@ -67,32 +131,39 @@ export default function LoginPage() {
           <FirstColumn className="secondContentFirstColumn">
             <Title color={"#fff"}>Olá, amigo!</Title>
             <Description className="description-primary">
-              Enter your personal details
+              Entre com seus dados pessoais
             </Description>
             <Description className="description-primary">
-              and start journey with us
+              e venha se deliciar com a gente!
             </Description>
-            <BtnPri onClick={() => setlogin(false)}>sign up</BtnPri>
+            <BtnPri onClick={() => setlogin(false)}>Cadastrar</BtnPri>
           </FirstColumn>
           <SecondColumn className="secondContentSecondColumn">
-            <Title color={"#72b4d4"}>sign in to developer</Title>
+            <Title color={"#72b4d4"}>entrar na conta</Title>
             <Description className="description-second">
-              or use your email account:
+              use sua conta de e-mail
             </Description>
-            <Form>
+            <Form onSubmit={handleLogin}>
               <label className="label-input">
                 <MdOutlineEmail color="#7f8c8d" size={18} />
-                <input type="email" placeholder="Email" />
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Email"
+                />
               </label>
 
               <label className="label-input">
                 <FaLock color="#7f8c8d" size={18} />
-                <input type="password" placeholder="Senha" />
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="Senha"
+                />
               </label>
-              <a className="password" href="#">
-                forgot your password?
-              </a>
-              <BtnSec>sign in</BtnSec>
+              <BtnSec type="submit">Cadastrar</BtnSec>
             </Form>
           </SecondColumn>
         </Content>

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./components/LoginPage";
+import ProductPage from "./components/ProductPage";
 import UserContext from "./contexts/UserContext";
 
 export default function App() {
@@ -10,7 +11,8 @@ export default function App() {
     <UserContext.Provider value={{ token, setToken, name, setName }}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<LoginPage />} />
+          <Route path="/" element={<ProductPage />} />
+          <Route path="/cadastro" element={<LoginPage />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
