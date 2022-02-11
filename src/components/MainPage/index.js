@@ -38,7 +38,7 @@ export default function MainPage() {
         try {
             const promise = await axios.post(process.env.REACT_APP_BACK_URL + 'cart', { productId: product._id }, {
                 headers: {
-                    'Authentication': `Bearer ${token}`
+                    'authorization': `Bearer ${token}`
                 }
             });
             setCartQuantity(promise.data.cart.length);
