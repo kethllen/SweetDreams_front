@@ -22,6 +22,13 @@ const HeaderDiv = styled.div`
     justify-content: space-between;
     align-items: center;
 
+    .back-button {
+        width: 30px;
+        height: 30px;
+
+        padding-right: 60px;
+    }
+
     h1 {
         font-family: "Lobster", cursive;
         font-size: 32px;

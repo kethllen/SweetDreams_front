@@ -1,14 +1,17 @@
 import Header from "../Header";
 import { ProductsContainer, CentralizedDiv, Product } from "./style";
-import img from "../../assets/testImg.jpg";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
-import ProductsContext from "../../contexts/ProductsContext";
+import UserContext from "../../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 export default function MainPage() {
 
-    const { products, setProducts } = useContext(ProductsContext);
+    const { token } = useContext(UserContext);
+    const [products, setProducts] = useState();
     const [inputValue, setInputValue] = useState('');
+    const [cartQuantity, setCartQuantity] = useState(0);
+    const navigate = useNavigate();
 
     useEffect(async () => {
         try {
@@ -24,6 +27,29 @@ export default function MainPage() {
         return product.name.toUpperCase().includes(inputValue.toUpperCase());
     }
 
+    function handleSelection(product) {
+        // if (!token) {
+        //     // navigate("/");
+        // } else {
+        //     addToCart(product);
+        // }
+        addToCart(product);
+    }
+
+    async function addToCart(product) {
+        try {
+            // await axios.post(process.env.BACK_URL);
+            const promise = await axios.post('http://localhost:5000/cart', { productId: product._id }, {
+                headers: {
+                    'Authentication': `Bearer ${token}`
+                }
+            });
+            setCartQuantity(promise.data.cart.length);
+        } catch (error) {
+            console.log(error.response);
+        }
+    }
+
     if (!products) {
         return (
             <h1>carregando</h1>
@@ -32,17 +58,17 @@ export default function MainPage() {
 
     return (
         <>
-            <Header setInputValue={setInputValue} />
+            <Header setInputValue={setInputValue} main={true} />
             <ProductsContainer>
                 <CentralizedDiv>
-                    {products.filter(searchFilter).map(obj => {
+                    {products.filter(searchFilter).map(product => {
                         return (
-                            <Product key={obj._id}>
-                                <img src={obj.image} alt="" />
-                                <p className="name">{obj.name}</p>
-                                <p className="description">{obj.description}</p>
-                                <p className="price">R${obj.price}</p>
-                                <button>Adicionar ao Carrinho</button>
+                            <Product key={product._id}>
+                                <img src={product.image} alt="" />
+                                <p className="name">{product.name}</p>
+                                <p className="description">{product.description}</p>
+                                <p className="price">R${product.price}</p>
+                                <button onClick={() => handleSelection(product)}>Adicionar ao Carrinho</button>
                             </Product>
                         );
                     })}
