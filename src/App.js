@@ -9,8 +9,9 @@ import UserContext from "./contexts/UserContext";
 export default function App() {
   const [token, setToken] = useState("");
   const [name, setName] = useState("");
+  const [cartQuantity, setCartQuantity] = useState(0);
   return (
-    < UserContext.Provider value={{ token, setToken, name, setName }}>
+    < UserContext.Provider value={{ token, setToken, name, setName, cartQuantity, setCartQuantity }}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />

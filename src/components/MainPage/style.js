@@ -37,6 +37,10 @@ const Product = styled.div`
         margin-bottom: 12px;
     }
 
+    .testerone {
+        object-fit: cover;
+    }
+
     .name {
         font-size: 14px;
 
@@ -71,7 +75,24 @@ const Product = styled.div`
         border: 2px solid #00ced1;
 
         cursor: pointer;
+
+        :hover {
+            color: #FFFFFF;        
+            background-color: #00ced1;
+            border: 2px solid #FFFFFF;
+        }
     }
 `
 
-export { ProductsContainer, CentralizedDiv, Product }
+const LoadingDiv = styled.div`
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: lightblue;
+`
+
+export { ProductsContainer, CentralizedDiv, Product, LoadingDiv }

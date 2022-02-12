@@ -1,16 +1,17 @@
 import Header from "../Header";
-import { ProductsContainer, CentralizedDiv, Product } from "./style";
+import { ProductsContainer, CentralizedDiv, Product, LoadingDiv } from "./style";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import UserContext from "../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
+import loading from "../../assets/loading.svg";
+import Swal from 'sweetalert2'
 
 export default function MainPage() {
 
-    const { token } = useContext(UserContext);
+    const { token, setCartQuantity } = useContext(UserContext);
     const [products, setProducts] = useState();
     const [inputValue, setInputValue] = useState('');
-    const [cartQuantity, setCartQuantity] = useState(0);
     const navigate = useNavigate();
 
     useEffect(async () => {
@@ -30,6 +31,20 @@ export default function MainPage() {
         if (!token) {
             navigate("/cadastro");
         } else {
+            Swal.fire({
+                titleText: product.name,
+                imageUrl: product.image,
+                imageWidth: 250,
+                imageHeight: 250,
+                showCancelButton: true,
+                html: `R$${product.price}<br/><b>Ótima escolha!<b/>`,
+                confirmButtonText: 'Voltar pra loja',
+                cancelButtonText: 'Ir para o carrinho',
+            }).then(result => {
+                if (result.isDenied) {
+                    navigate('/cart');
+                }
+            })
             addToCart(product);
         }
     }
@@ -49,7 +64,9 @@ export default function MainPage() {
 
     if (!products) {
         return (
-            <h1>carregando</h1>
+            <LoadingDiv>
+                <img src={loading} alt="" />
+            </LoadingDiv>
         );
     }
 

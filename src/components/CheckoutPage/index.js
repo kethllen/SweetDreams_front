@@ -5,8 +5,6 @@ import { CheckoutDiv, CentralizedDiv, CheckoutForm, ProductInfo, InputDiv, Input
 export default function CheckoutPage() {
 
     const [formStage, setFormStage] = useState('adress');
-    // const [formStage, setFormStage] = useState('payment');
-
 
     return (
         <>
