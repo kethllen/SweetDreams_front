@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Cart from "./components/Cart";
 import LoginPage from "./components/LoginPage";
 import MainPage from "./components/MainPage";
+import CheckoutPage from "./components/CheckoutPage";
 import UserContext from "./contexts/UserContext";
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
           <Route path="/" element={<MainPage />} />
           <Route path="/cadastro" element={<LoginPage />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/pagamento" element={<CheckoutPage />} />
         </Routes>
       </BrowserRouter>
     </UserContext.Provider >
