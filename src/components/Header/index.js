@@ -32,7 +32,7 @@ export default function Header({ setInputValue, main }) {
 
   function handleCartPage() {
     if (token) {
-      navigate('/cart');
+      navigate('/carrinho');
     } else {
       navigate('/cadastro');
     }
@@ -41,7 +41,7 @@ export default function Header({ setInputValue, main }) {
   return (
     <HeaderContainer>
       <HeaderDiv>
-        {!main && <IoHomeSharp onClick={() => navigate('/')} color="#ffffff" size={28} />}
+        {!main && <IoHomeSharp onClick={() => navigate('/')} className="house-icon" color="#ffffff" size={28} />}
         <Logo>
           <img src={logo} />
           <h1>SweetDreams</h1>

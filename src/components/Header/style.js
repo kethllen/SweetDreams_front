@@ -35,6 +35,10 @@ const HeaderDiv = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  .house-icon {
+    cursor: pointer;
+  }
+
   .back-button {
     width: 30px;
     height: 30px;

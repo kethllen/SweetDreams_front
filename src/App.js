@@ -16,7 +16,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/cadastro" element={<LoginPage />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/carrinho" element={<Cart />} />
           <Route path="/pagamento" element={<CheckoutPage />} />
         </Routes>
       </BrowserRouter>

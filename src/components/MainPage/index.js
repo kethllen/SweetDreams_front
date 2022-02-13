@@ -38,11 +38,11 @@ export default function MainPage() {
                 imageHeight: 250,
                 showCancelButton: true,
                 html: `R$${product.price}<br/><b>Ótima escolha!<b/>`,
-                confirmButtonText: 'Voltar pra loja',
-                cancelButtonText: 'Ir para o carrinho',
+                confirmButtonText: 'Ir para o carrinho',
+                cancelButtonText: 'Voltar pra loja',
             }).then(result => {
-                if (result.isDenied) {
-                    navigate('/cart');
+                if (result.isConfirmed) {
+                    navigate('/carrinho');
                 }
             })
             addToCart(product);
