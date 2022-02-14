@@ -57,7 +57,7 @@ export default function Cart() {
     } else {
       qtd = parseInt(item.quantity) - 1;
     }
-
+    console.log(qtd);
     const id = item.productId;
     const productUpdate = {
       cart: {
@@ -65,14 +65,15 @@ export default function Cart() {
         quantity: qtd,
       },
     };
+    console.log(productUpdate);
     const promise = axios.put(
       process.env.REACT_APP_BACK_URL + "cart",
+      productUpdate,
       {
         headers: {
           authorization: `Bearer ${token}`,
         },
-      },
-      productUpdate
+      }
     );
     promise.then((response) => {
       setRender(render + 1);
