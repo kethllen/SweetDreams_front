@@ -27,7 +27,6 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [nameInput, setNameInput] = useState("");
   const navigate = useNavigate();
-  console.log(process.env.REACT_APP_BACK_URL + "sign-in");
   function handleLogin(e) {
     e.preventDefault();
     const promise = axios.post(process.env.REACT_APP_BACK_URL + "sign-in", {
@@ -163,7 +162,7 @@ export default function LoginPage() {
                   placeholder="Senha"
                 />
               </label>
-              <BtnSec type="submit">Cadastrar</BtnSec>
+              <BtnSec type="submit">Entrar</BtnSec>
             </Form>
           </SecondColumn>
         </Content>

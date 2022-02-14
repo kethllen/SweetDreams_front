@@ -1,78 +1,74 @@
 import styled from "styled-components";
 
 const ProductsContainer = styled.div`
-    width: 100%;
-    
-    padding-top: 80px;
-    padding-bottom: 30px;
+  width: 100%;
 
-    display: flex; 
-    justify-content: center;
-`
+  padding-top: 80px;
+  padding-bottom: 30px;
+
+  display: flex;
+  justify-content: center;
+`;
 
 const CentralizedDiv = styled.div`
-    width: 900px;
-    
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-column-gap: 12px;
-    grid-row-gap: 40px;
+  width: 900px;
 
-    justify-content: center;
-`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 12px;
+  grid-row-gap: 40px;
+
+  justify-content: center;
+`;
 
 const Product = styled.div`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-    text-align: center;
+  text-align: center;
 
-    img {
-        width: 100%;
-        height: 210px;
+  img {
+    width: 100%;
+    height: 210px;
 
-        object-fit: cover;
+    object-fit: cover;
 
-        margin-bottom: 12px;
-    }
+    margin-bottom: 12px;
+  }
 
-    .testerone {
-        object-fit: cover;
-    }
+  .name {
+    font-size: 14px;
 
-    .name {
-        font-size: 14px;
+    margin-bottom: 12px;
+  }
 
-        margin-bottom: 12px;
-    }
+  .description {
+    font-size: 8px;
 
-    .description {
-        font-size: 8px;
+    margin-bottom: 20px;
+  }
 
-        margin-bottom: 20px;
-    }
+  .price {
+    font-size: 12px;
 
-    .price {
-        font-size: 12px;
+    margin-bottom: 8px;
+  }
 
-        margin-bottom: 8px;
-    }
+  button {
+    width: 100%;
 
-    button {
-        width: 100%;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #00ced1;
 
-        font-size: 13px;
-        font-weight: 700;
-        text-transform: uppercase;
-        color: #00ced1;
+    padding: 10px 0;
 
-        padding: 10px 0;
-        
-        background-color: #FFFFFF;
+    background-color: #ffffff;
 
-        border-radius: 10px;
-        border: 2px solid #00ced1;
+    border-radius: 10px;
+    border: 2px solid #00ced1;
 
         cursor: pointer;
 
@@ -96,3 +92,4 @@ const LoadingDiv = styled.div`
 `
 
 export { ProductsContainer, CentralizedDiv, Product, LoadingDiv }
+

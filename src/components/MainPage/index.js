@@ -8,7 +8,6 @@ import loading from "../../assets/loading.svg";
 import Swal from 'sweetalert2';
 
 export default function MainPage() {
-
     const { token, setCartQuantity } = useContext(UserContext);
     const [products, setProducts] = useState();
     const [inputValue, setInputValue] = useState('');
@@ -47,20 +46,25 @@ export default function MainPage() {
             })
             addToCart(product);
         }
-    }
 
-    async function addToCart(product) {
-        try {
-            const promise = await axios.post(process.env.REACT_APP_BACK_URL + 'cart', { productId: product._id }, {
-                headers: {
-                    'authorization': `Bearer ${token}`
-                }
-            });
-            setCartQuantity(promise.data.cart.length);
-        } catch (error) {
-            console.log(error.response);
+  async function addToCart(product) {
+    try {
+      const promise = await axios.post(
+        process.env.REACT_APP_BACK_URL + "cart",
+        { productId: product._id },
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
         }
+      );
+      setCartQuantity(promise.data.cart.length);
+      console.log(cartQuantity);
+    } catch (error) {
+      console.log(error.response);
     }
+  }
+
 
     if (!products) {
         return (
@@ -70,24 +74,27 @@ export default function MainPage() {
         );
     }
 
-    return (
-        <>
-            <Header setInputValue={setInputValue} main={true} />
-            <ProductsContainer>
-                <CentralizedDiv>
-                    {products.filter(searchFilter).map(product => {
-                        return (
-                            <Product key={product._id}>
-                                <img src={product.image} alt="" />
-                                <p className="name">{product.name}</p>
-                                <p className="description">{product.description}</p>
-                                <p className="price">R${product.price}</p>
-                                <button onClick={() => handleSelection(product)}>Adicionar ao Carrinho</button>
-                            </Product>
-                        );
-                    })}
-                </CentralizedDiv>
-            </ProductsContainer>
-        </>
-    );
+
+  return (
+    <>
+      <Header setInputValue={setInputValue} main={true} />
+      <ProductsContainer>
+        <CentralizedDiv>
+          {products.filter(searchFilter).map((product) => {
+            return (
+              <Product key={product._id}>
+                <img src={product.image} alt="" />
+                <p className="name">{product.name}</p>
+                <p className="description">{product.description}</p>
+                <p className="price">R${product.price}</p>
+                <button onClick={() => handleSelection(product)}>
+                  Adicionar ao Carrinho
+                </button>
+              </Product>
+            );
+          })}
+        </CentralizedDiv>
+      </ProductsContainer>
+    </>
+  );
 }
