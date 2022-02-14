@@ -35,6 +35,10 @@ const HeaderDiv = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  .house-icon {
+    cursor: pointer;
+  }
+
   .back-button {
     width: 30px;
     height: 30px;
@@ -50,13 +54,43 @@ const HeaderDiv = styled.div`
 
   .cart {
     width: 90px;
+    height: 30px;
 
     display: flex;
     justify-content: flex-end;
+    
+    position: relative;
 
-    img {
+    .cart-quantity {
+      width: 12px;
+      height: 12px;
+
+      font-weight: bold;
+      color: #ffffff;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      font-size: 9px;
+
+      border-radius: 50%;
+
+      background-color: red;
+
+      position: absolute;
+      right: 0;
+    }
+
+    .cart-icon {
       width: 25px;
       height: 25px;
+
+      margin-right: 5px;
+
+      align-self: center;
+
+      cursor: pointer;
     }
   }
 `;

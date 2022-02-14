@@ -70,8 +70,26 @@ const Product = styled.div`
     border-radius: 10px;
     border: 2px solid #00ced1;
 
-    cursor: pointer;
-  }
-`;
+        cursor: pointer;
 
-export { ProductsContainer, CentralizedDiv, Product };
+        :hover {
+            color: #FFFFFF;        
+            background-color: #00ced1;
+            border: 2px solid #FFFFFF;
+        }
+    }
+`
+
+const LoadingDiv = styled.div`
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: lightblue;
+`
+
+export { ProductsContainer, CentralizedDiv, Product, LoadingDiv }
+
