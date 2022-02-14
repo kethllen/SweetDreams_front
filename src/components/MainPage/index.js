@@ -5,7 +5,7 @@ import axios from "axios";
 import UserContext from "../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 import loading from "../../assets/loading.svg";
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 export default function MainPage() {
 

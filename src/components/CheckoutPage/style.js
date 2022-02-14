@@ -15,6 +15,14 @@ const CentralizedDiv = styled.div`
 
     display: flex;
     justify-content: space-between;
+
+    input {
+        border: 1px solid lightblue;
+        border-radius: 5px;
+
+        text-indent: 8px;
+        font-size: 9.5px;
+    }
 `
 
 const CheckoutForm = styled.form`
@@ -124,14 +132,6 @@ const InputDiv = styled.div`
     }
 `
 
-const Input = styled.input`
-    border: 1px solid lightblue;
-    border-radius: 5px;
-
-    text-indent: 8px;
-    font-size: 9.5px;
-`
-
 const ProductInfo = styled.div`
     width: 300px;
     height: min-content;
@@ -175,6 +175,8 @@ const ProductInfo = styled.div`
             height: 50px;
 
             margin-right: 6px;
+
+            object-fit: cover;
         }
 
         p {
@@ -201,7 +203,17 @@ const ProductInfo = styled.div`
         display: flex;
         justify-content: space-between;
     }
+`
 
+const LoadingDiv = styled.div`
+    width: 100%;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: lightblue;
 `
 
 export {
@@ -210,5 +222,5 @@ export {
     CheckoutForm,
     ProductInfo,
     InputDiv,
-    Input
+    LoadingDiv
 }

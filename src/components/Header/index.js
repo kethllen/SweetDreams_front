@@ -32,7 +32,7 @@ export default function Header({ setInputValue, main }) {
 
   function handleCartPage() {
     if (token) {
-      navigate('/carrinho');
+      navigate('/pagamento');
     } else {
       navigate('/cadastro');
     }
