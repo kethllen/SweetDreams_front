@@ -17,7 +17,13 @@ export default function Header({ setInputValue, main }) {
   return (
     <HeaderContainer>
       <HeaderDiv>
-        {!main && <IoHomeSharp color="#ffffff" size={28} />}
+        {!main && (
+          <IoHomeSharp
+            color="#ffffff"
+            size={28}
+            onClick={() => navigate("/")}
+          />
+        )}
         <Logo>
           <img src={logo} />
           <h1>SweetDreams</h1>
@@ -33,7 +39,11 @@ export default function Header({ setInputValue, main }) {
           </SearchDiv>
         )}
         <div className="cart">
-          <FaShoppingCart color="#ffffff" size={28} />
+          <FaShoppingCart
+            color="#ffffff"
+            size={28}
+            onClick={() => navigate("/cart")}
+          />
         </div>
       </HeaderDiv>
     </HeaderContainer>
