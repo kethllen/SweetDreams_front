@@ -20,6 +20,7 @@ const Quantity = styled.div`
   display: flex;
   justify-self: center;
   align-self: center;
+  cursor: pointer;
   font-size: ${(props) => props.size};
   margin-top: ${(props) => props.top};
   gap: 5px;

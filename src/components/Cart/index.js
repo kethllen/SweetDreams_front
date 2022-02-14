@@ -35,11 +35,11 @@ export default function Cart() {
       },
     });
     promise.then((response) => {
-      console.log(response.data);
       setCartItems(response.data);
     });
     promise.catch((error) => {
-      alert(error.response.data.message);
+      console.log(error.data);
+      navigate("/cadastro");
     });
   }, [token, navigate, render]);
 
@@ -50,7 +50,7 @@ export default function Cart() {
       </LoadingDiv>
     );
   }
-  function UpdateItem(item, inc) {
+  function updateItem(item, inc) {
     let qtd = 0;
     if (inc == true) {
       qtd = parseInt(item.quantity) + 1;
@@ -103,20 +103,30 @@ export default function Cart() {
           <CartContainer>
             {cartItems.map((product) => {
               return (
-                <CartDiv>
+                <CartDiv key={product.productId}>
                   <CartNome>
                     <img src={product.image} />
                     <h1>{product.name}</h1>
                   </CartNome>
                   <h2>R$ {product.price}</h2>
                   <h2>
-                    <Quantity color={"#87ceeb"} size={"22px"} top={"0px"}>
+                    <Quantity
+                      color={"#87ceeb"}
+                      size={"22px"}
+                      top={"0px"}
+                      onClick={() => updateItem(product, true)}
+                    >
                       +
                     </Quantity>
                     <Quantity color={"#363636"} size={"18px"} top={"7px"}>
                       {product.quantity}
                     </Quantity>
-                    <Quantity color={"#87ceeb"} size={"30px"} top={"0px"}>
+                    <Quantity
+                      color={"#87ceeb"}
+                      size={"30px"}
+                      top={"0px"}
+                      onClick={() => updateItem(product, false)}
+                    >
                       -
                     </Quantity>
                   </h2>
@@ -125,7 +135,7 @@ export default function Cart() {
               );
             })}
             <Total>Total: R$ {total}</Total>
-            <Button>Checkout</Button>
+            <Button onClick={() => navigate("/pagamento")}>Checkout</Button>
           </CartContainer>
         </BodyDiv>
       </BodyContainer>
