@@ -37,6 +37,7 @@ export default function Cart() {
     promise.then((response) => {
       console.log(response.data);
       setCartItems(response.data);
+      quantity = response.data;
     });
     promise.catch((error) => {
       alert(error.response.data.message);
@@ -98,23 +99,37 @@ export default function Cart() {
           <h2>SUBTOTAL</h2>
         </HeaderDiv>
       </HeaderContainer>
-      <CartContainer>
-        {cartItems.map((product) => {
-          return (
-            <CartDiv>
-              <CartNome>
-                <img src={product.image} />
-                <h1>{product.name}</h1>
-              </CartNome>
-              <h2>R$ {product.price}</h2>
-              <h2>{product.quantity}</h2>
-              <h2>R$ {product.subtotal}</h2>
-            </CartDiv>
-          );
-        })}
-        <Total>Total: R$ {total}</Total>
-        <Button onClick={() => navigate("/pagamento")}>Pagamento</Button>
-      </CartContainer>
+      <BodyContainer>
+        <BodyDiv>
+          <CartContainer>
+            {cartItems.map((product) => {
+              return (
+                <CartDiv>
+                  <CartNome>
+                    <img src={product.image} />
+                    <h1>{product.name}</h1>
+                  </CartNome>
+                  <h2>R$ {product.price}</h2>
+                  <h2>
+                    <Quantity color={"#87ceeb"} size={"22px"} top={"0px"}>
+                      +
+                    </Quantity>
+                    <Quantity color={"#363636"} size={"18px"} top={"7px"}>
+                      {product.quantity}
+                    </Quantity>
+                    <Quantity color={"#87ceeb"} size={"30px"} top={"0px"}>
+                      -
+                    </Quantity>
+                  </h2>
+                  <h2>R$ {product.subtotal}</h2>
+                </CartDiv>
+              );
+            })}
+            <Total>Total: R$ {total}</Total>
+            <Button>Checkout</Button>
+          </CartContainer>
+        </BodyDiv>
+      </BodyContainer>
     </>
   );
 }

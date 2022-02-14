@@ -7,6 +7,24 @@ const HeaderContainer = styled.header`
   justify-content: center;
   align-items: center;
 `;
+const BodyContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const BodyDiv = styled.div`
+  width: 900px;
+`;
+const Quantity = styled.div`
+  display: flex;
+  justify-self: center;
+  align-self: center;
+  font-size: ${(props) => props.size};
+  margin-top: ${(props) => props.top};
+  gap: 5px;
+  color: ${(props) => props.color};
+`;
 
 const Title = styled.h2`
   margin-left: 190px;
@@ -82,8 +100,7 @@ const CartDiv = styled.div`
 `;
 const CartContainer = styled.div`
   margin-top: 20px;
-  margin-left: 190px;
-  width: 900px;
+  width: 100%;
   height: 120px;
   display: flex;
   flex-direction: column;
@@ -133,4 +150,7 @@ export {
   Total,
   Button,
   LoadingDiv,
+  Quantity,
+  BodyContainer,
+  BodyDiv,
 };

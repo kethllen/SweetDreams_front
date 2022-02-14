@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Cart from "./components/Cart";
+import Delivery from "./components/Delivery";
 import LoginPage from "./components/LoginPage";
 import MainPage from "./components/MainPage";
 import CheckoutPage from "./components/CheckoutPage";
@@ -11,15 +12,17 @@ export default function App() {
   const [name, setName] = useState("");
   const [cartQuantity, setCartQuantity] = useState(0);
   return (
+
     < UserContext.Provider value={{ token, setToken, name, setName, cartQuantity, setCartQuantity }}>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="/cadastro" element={<LoginPage />} />
+          <Route path="/cadastro" element={<LoginPage />} />>
+          <Route path="/delivery" element={<Delivery />} />
           <Route path="/carrinho" element={<Cart />} />
           <Route path="/pagamento" element={<CheckoutPage />} />
         </Routes>
       </BrowserRouter>
-    </UserContext.Provider >
+    </UserContext.Provider>
   );
 }
