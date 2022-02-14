@@ -37,7 +37,6 @@ export default function Cart() {
     promise.then((response) => {
       console.log(response.data);
       setCartItems(response.data);
-      quantity = response.data;
     });
     promise.catch((error) => {
       alert(error.response.data.message);
@@ -66,7 +65,7 @@ export default function Cart() {
         quantity: qtd,
       },
     };
-    const promise = axios.update(
+    const promise = axios.put(
       process.env.REACT_APP_BACK_URL + "cart",
       {
         headers: {
