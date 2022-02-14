@@ -12,11 +12,15 @@ import {
   CartNome,
   Total,
   Button,
+  Quantity,
+  BodyContainer,
+  BodyDiv,
 } from "./styled";
 
 export default function Cart() {
   const { token, name } = useContext(UserContext);
   const [cartItems, setCartItems] = useState([]);
+  let quantity = [];
   let total = 0;
   const navigate = useNavigate();
   if (!token) {
@@ -32,6 +36,7 @@ export default function Cart() {
     promise.then((response) => {
       console.log(response.data);
       setCartItems(response.data);
+      quantity = response.data;
     });
     promise.catch((error) => {
       alert(error.response.data.message);
@@ -53,23 +58,37 @@ export default function Cart() {
           <h2>SUBTOTAL</h2>
         </HeaderDiv>
       </HeaderContainer>
-      <CartContainer>
-        {cartItems.map((product) => {
-          return (
-            <CartDiv>
-              <CartNome>
-                <img src={product.image} />
-                <h1>{product.name}</h1>
-              </CartNome>
-              <h2>R$ {product.price}</h2>
-              <h2>{product.quantity}</h2>
-              <h2>R$ {product.subtotal}</h2>
-            </CartDiv>
-          );
-        })}
-        <Total>Total: R$ {total}</Total>
-        <Button>Checkout</Button>
-      </CartContainer>
+      <BodyContainer>
+        <BodyDiv>
+          <CartContainer>
+            {cartItems.map((product) => {
+              return (
+                <CartDiv>
+                  <CartNome>
+                    <img src={product.image} />
+                    <h1>{product.name}</h1>
+                  </CartNome>
+                  <h2>R$ {product.price}</h2>
+                  <h2>
+                    <Quantity color={"#87ceeb"} size={"22px"} top={"0px"}>
+                      +
+                    </Quantity>
+                    <Quantity color={"#363636"} size={"18px"} top={"7px"}>
+                      {product.quantity}
+                    </Quantity>
+                    <Quantity color={"#87ceeb"} size={"30px"} top={"0px"}>
+                      -
+                    </Quantity>
+                  </h2>
+                  <h2>R$ {product.subtotal}</h2>
+                </CartDiv>
+              );
+            })}
+            <Total>Total: R$ {total}</Total>
+            <Button>Checkout</Button>
+          </CartContainer>
+        </BodyDiv>
+      </BodyContainer>
     </>
   );
 }
