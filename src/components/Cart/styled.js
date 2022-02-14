@@ -113,7 +113,16 @@ const Button = styled.button`
   border-radius: 5px;
   align-self: end;
 `;
+const LoadingDiv = styled.div`
+  width: 100%;
+  height: 100vh;
 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: lightblue;
+`;
 export {
   HeaderDiv,
   HeaderContainer,
@@ -123,4 +132,5 @@ export {
   CartNome,
   Total,
   Button,
+  LoadingDiv,
 };

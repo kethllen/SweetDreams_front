@@ -15,33 +15,39 @@ import UserContext from "../../contexts/UserContext";
 import axios from "axios";
 
 export default function Header({ setInputValue, main }) {
-
   const { token, cartQuantity, setCartQuantity } = useContext(UserContext);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (token) {
-      const promise = axios.get(process.env.REACT_APP_BACK_URL + 'cart', {
+      const promise = axios.get(process.env.REACT_APP_BACK_URL + "cart", {
         headers: {
-          'authorization': `Bearer ${token}`
-        }
+          authorization: `Bearer ${token}`,
+        },
       });
-      promise.then(answer => setCartQuantity(answer.data.length));
+      promise.then((answer) => setCartQuantity(answer.data.length));
     }
   }, [setCartQuantity, token]);
 
   function handleCartPage() {
     if (token) {
-      navigate('/cart');
+      navigate("/carrinho");
     } else {
-      navigate('/cadastro');
+      navigate("/cadastro");
     }
   }
 
   return (
     <HeaderContainer>
       <HeaderDiv>
-        {!main && <IoHomeSharp onClick={() => navigate('/')} className="house-icon" color="#ffffff" size={28} />}
+        {!main && (
+          <IoHomeSharp
+            onClick={() => navigate("/")}
+            className="house-icon"
+            color="#ffffff"
+            size={28}
+          />
+        )}
 
         <Logo>
           <img src={logo} />
@@ -58,8 +64,15 @@ export default function Header({ setInputValue, main }) {
           </SearchDiv>
         )}
         <div className="cart">
-          {cartQuantity > 0 && <div className="cart-quantity">{cartQuantity}</div>}
-          <FaShoppingCart onClick={handleCartPage} className="cart-icon" color="#ffffff" size={28} />
+          {cartQuantity > 0 && (
+            <div className="cart-quantity">{cartQuantity}</div>
+          )}
+          <FaShoppingCart
+            onClick={handleCartPage}
+            className="cart-icon"
+            color="#ffffff"
+            size={28}
+          />
         </div>
       </HeaderDiv>
     </HeaderContainer>

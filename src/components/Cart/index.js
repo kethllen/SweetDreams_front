@@ -15,17 +15,19 @@ import {
   Quantity,
   BodyContainer,
   BodyDiv,
+  LoadingDiv,
 } from "./styled";
+import loading from "../../assets/loading.svg";
 
 export default function Cart() {
   const { token, name } = useContext(UserContext);
   const [cartItems, setCartItems] = useState([]);
+  const [render, setRender] = useState(0);
   let total = 0;
   const navigate = useNavigate();
   if (!token) {
     navigate("/cadastro");
   }
-  console.log(token);
   useEffect(() => {
     const promise = axios.get(process.env.REACT_APP_BACK_URL + "cart", {
       headers: {
@@ -39,7 +41,47 @@ export default function Cart() {
     promise.catch((error) => {
       alert(error.response.data.message);
     });
-  }, []);
+  }, [token, navigate, render]);
+
+  if (!cartItems) {
+    return (
+      <LoadingDiv>
+        <img src={loading} alt="" />
+      </LoadingDiv>
+    );
+  }
+  function UpdateItem(item, inc) {
+    let qtd = 0;
+    if (inc == true) {
+      qtd = parseInt(item.quantity) + 1;
+    } else {
+      qtd = parseInt(item.quantity) - 1;
+    }
+
+    const id = item.productId;
+    const productUpdate = {
+      cart: {
+        productId: id,
+        quantity: qtd,
+      },
+    };
+    const promise = axios.update(
+      process.env.REACT_APP_BACK_URL + "cart",
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+      },
+      productUpdate
+    );
+    promise.then((response) => {
+      setRender(render + 1);
+    });
+    promise.catch((error) => {
+      alert(error.response.data.message);
+    });
+  }
+
   cartItems.map((product) => {
     const aux = product.subtotal.replace(",", ".");
     total += parseFloat(aux);
@@ -71,7 +113,7 @@ export default function Cart() {
           );
         })}
         <Total>Total: R$ {total}</Total>
-        <Button>Checkout</Button>
+        <Button onClick={() => navigate("/pagamento")}>Pagamento</Button>
       </CartContainer>
     </>
   );
