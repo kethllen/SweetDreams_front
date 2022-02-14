@@ -1,39 +1,51 @@
 import Header from "../Header";
-import { ProductsContainer, CentralizedDiv, Product } from "./style";
+import { ProductsContainer, CentralizedDiv, Product, LoadingDiv } from "./style";
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import UserContext from "../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
+import loading from "../../assets/loading.svg";
+import Swal from 'sweetalert2';
 
 export default function MainPage() {
-  const { token } = useContext(UserContext);
-  const [products, setProducts] = useState();
-  const [inputValue, setInputValue] = useState("");
-  const [cartQuantity, setCartQuantity] = useState(0);
-  const navigate = useNavigate();
+    const { token, setCartQuantity } = useContext(UserContext);
+    const [products, setProducts] = useState();
+    const [inputValue, setInputValue] = useState('');
+    const navigate = useNavigate();
 
-  useEffect(async () => {
-    try {
-      const promise = await axios.get(
-        process.env.REACT_APP_BACK_URL + "products"
-      );
-      setProducts(promise.data);
-    } catch (error) {
-      console.log(error);
+    useEffect(async () => {
+        try {
+            const promise = await axios.get(process.env.REACT_APP_BACK_URL + 'products');
+            setProducts(promise.data);
+        } catch (error) {
+            console.log(error);
+        }
+    }, []);
+
+    function searchFilter(product) {
+        return product.name.toUpperCase().includes(inputValue.toUpperCase());
     }
-  }, []);
 
-  function searchFilter(product) {
-    return product.name.toUpperCase().includes(inputValue.toUpperCase());
-  }
-
-  function handleSelection(product) {
-    if (!token) {
-      navigate("/cadastro");
-    } else {
-      addToCart(product);
-    }
-  }
+    function handleSelection(product) {
+        if (!token) {
+            navigate("/cadastro");
+        } else {
+            Swal.fire({
+                titleText: product.name,
+                imageUrl: product.image,
+                imageWidth: 250,
+                imageHeight: 250,
+                showCancelButton: true,
+                html: `R$${product.price}<br/><b>Ótima escolha!<b/>`,
+                confirmButtonText: 'Ir para o carrinho',
+                cancelButtonText: 'Voltar pra loja',
+            }).then(result => {
+                if (result.isConfirmed) {
+                    navigate('/carrinho');
+                }
+            })
+            addToCart(product);
+        }
 
   async function addToCart(product) {
     try {
@@ -53,9 +65,15 @@ export default function MainPage() {
     }
   }
 
-  if (!products) {
-    return <h1>carregando</h1>;
-  }
+
+    if (!products) {
+        return (
+            <LoadingDiv>
+                <img src={loading} alt="" />
+            </LoadingDiv>
+        );
+    }
+
 
   return (
     <>

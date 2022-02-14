@@ -12,6 +12,9 @@ import {
   CartNome,
   Total,
   Button,
+  Quantity,
+  BodyContainer,
+  BodyDiv,
 } from "./styled";
 
 export default function Cart() {
