@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const ContainerDiv = styled.div`
   width: 100%;
-  background-color: #87ceeb;
+  background-color: #ffffff;
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -13,10 +13,11 @@ const ContainerDiv = styled.div`
     height: 301px;
   }
   h1 {
+    margin-top: 25px;
     font-family: "Open Sans", sans-serif;
     font-size: 25px;
-    margin-right: 200px;
-    color: #ffffff;
+    font-weight: bold;
+    color: #87ceeb;
   }
 `;
 const HeaderContainer = styled.header`

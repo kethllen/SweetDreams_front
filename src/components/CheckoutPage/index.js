@@ -107,7 +107,7 @@ export default function CheckoutPage() {
           title: "Seu pedido foi realizado!",
         });
         setCartQuantity(0);
-        navigate("/");
+        navigate("/delivery");
       });
       promise.catch((answer) => console.log(answer.response));
     } else {
