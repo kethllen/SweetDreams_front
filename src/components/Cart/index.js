@@ -87,6 +87,7 @@ export default function Cart() {
     const aux = product.subtotal.replace(",", ".");
     total += parseFloat(aux);
   });
+  total = total.toFixed(2);
   return (
     <>
       <Header main={false} />
@@ -131,11 +132,11 @@ export default function Cart() {
                       -
                     </Quantity>
                   </h2>
-                  <h2>R$ {product.subtotal}</h2>
+                  <h2>R$ {product.subtotal.replace(".", ",")}</h2>
                 </CartDiv>
               );
             })}
-            <Total>Total: R$ {total}</Total>
+            <Total>Total: R$ {total.replace(".", ",")}</Total>
             <Button onClick={() => navigate("/pagamento")}>Checkout</Button>
           </CartContainer>
         </BodyDiv>

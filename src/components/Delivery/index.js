@@ -1,5 +1,6 @@
-import ContainerDiv from "./style";
+import { ContainerDiv, HeaderDiv, HeaderContainer, Logo } from "./style";
 import delivery from "../../assets/delivery.png";
+import TiArrowBack from "react-icons/ti";
 
 export default function Delivery() {
   return (

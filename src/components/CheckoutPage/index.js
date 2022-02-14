@@ -17,7 +17,7 @@ import Swal from "sweetalert2";
 import NumberFormat from "react-number-format";
 
 export default function CheckoutPage() {
-  const { token } = useContext(UserContext);
+  const { token, cartQuantity, setCartQuantity } = useContext(UserContext);
   const [formData, setFormData] = useState({
     name: "",
     adress: "",
@@ -106,6 +106,7 @@ export default function CheckoutPage() {
           icon: "success",
           title: "Seu pedido foi realizado!",
         });
+        setCartQuantity(0);
         navigate("/");
       });
       promise.catch((answer) => console.log(answer.response));
@@ -280,7 +281,7 @@ export default function CheckoutPage() {
           </CheckoutForm>
           <ProductInfo>
             <p className="sumary">Resumo do pedido</p>
-            <p className="items">4 itens</p>
+            <p className="items">{cartQuantity} itens</p>
             {productsInfo.map((product) => {
               return (
                 <div
